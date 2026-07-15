@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  /* Highland heritage palette */
+  --color-navy-950: #10182e;
+  --color-navy-900: #16213f;
+  --color-navy-800: #1c2a4d;
+  --color-navy-700: #26365e;
+  --color-navy-600: #33456f;
+  --color-gold-300: #e3c04f;
+  --color-gold-400: #d4af37;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a8861f;
+  --color-gold-700: #7c6316;
+  --color-cream-50: #faf7f0;
+  --color-cream-100: #f6f1e7;
+  --color-cream-200: #efe7d6;
+  --color-cream-300: #e2d5bb;
+  --color-forest-600: #2f5a3d;
+  --color-forest-700: #264a32;
+  --color-clay-600: #8b2f33;
+  --color-clay-700: #732629;
+  --color-ink-900: #241f18;
+  --color-ink-600: #55503f;
+
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-source-sans), system-ui, sans-serif;
+}
+
+:root {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-cream-100);
+  color: var(--color-ink-900);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tartan — woven from layered repeating gradients. Decorative only:  */
+/* always used at low opacity behind headings/dividers, never text.   */
+/* ------------------------------------------------------------------ */
+.tartan {
+  background-color: var(--color-navy-800);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 34px,
+      rgba(201, 162, 39, 0.28) 34px 38px,
+      transparent 38px 62px,
+      rgba(242, 236, 221, 0.14) 62px 66px,
+      transparent 66px 96px,
+      rgba(47, 90, 61, 0.45) 96px 110px,
+      transparent 110px 140px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 34px,
+      rgba(201, 162, 39, 0.28) 34px 38px,
+      transparent 38px 62px,
+      rgba(242, 236, 221, 0.14) 62px 66px,
+      transparent 66px 96px,
+      rgba(47, 90, 61, 0.45) 96px 110px,
+      transparent 110px 140px
+    );
+}
+
+/* Thin tartan ribbon used as a section divider */
+.tartan-ribbon {
+  height: 10px;
+  background-color: var(--color-navy-800);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 14px,
+    rgba(201, 162, 39, 0.55) 14px 18px,
+    transparent 18px 30px,
+    rgba(242, 236, 221, 0.25) 30px 33px,
+    transparent 33px 46px,
+    rgba(139, 47, 51, 0.6) 46px 54px,
+    transparent 54px 68px
+  );
+}
+
+/* Serif display headings */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Gold rule with a center diamond, used under section headings */
+.heading-rule {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.heading-rule::before,
+.heading-rule::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(
+    to var(--rule-dir, right),
+    var(--color-gold-500),
+    transparent
+  );
+}
+.heading-rule::before {
+  --rule-dir: left;
+}
