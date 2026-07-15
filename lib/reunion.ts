@@ -100,8 +100,17 @@ export const lodgingNote =
 // Family leads
 // ---------------------------------------------------------------------------
 
-export type FamilyLead = { branch: string; lead: string };
+export type FamilyLead = {
+  branch: string;
+  lead: string;
+  phone?: string;
+  email?: string;
+};
 
+// Each branch card on the site is a dropdown showing the lead's contact info.
+// Fill in phone/email below, e.g.:
+//   { branch: "Leo Miller", lead: "Steve Miller", phone: "(801) 555-1234", email: "steve@example.com" },
+// Until then the dropdown shows a "contact details coming soon" note.
 export const familyLeads: FamilyLead[] = [
   { branch: "Leo Miller", lead: "Steve Miller" },
   { branch: "Colin Miller", lead: "Scott Miller" },
