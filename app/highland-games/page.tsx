@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Crest } from "@/components/crest";
 import { AddToCalendar } from "@/components/add-to-calendar";
+import { Reveal } from "@/components/reveal";
 import { Section, SectionHeading } from "@/components/section";
 import { games } from "@/lib/reunion";
 
@@ -17,19 +18,28 @@ export default function HighlandGamesPage() {
       <div className="tartan text-cream-100">
         <div className="bg-navy-900/85">
           <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 px-4 py-14 text-center sm:px-6 sm:py-20">
-            <Crest className="h-36 w-auto sm:h-44" />
-            <h1 className="font-display text-4xl font-bold tracking-wide sm:text-5xl">
-              {games.name}
-            </h1>
-            <p className="text-lg font-semibold text-gold-300">
-              {games.when}
-              <span className="mx-2 text-cream-200/60">·</span>
-              <span className="text-cream-200">{games.where}</span>
-            </p>
-            <p className="max-w-2xl leading-relaxed text-cream-200">
+            <div className="anim-crest">
+              <Crest className="h-36 w-auto sm:h-44" />
+            </div>
+            <div className="anim-rise" style={{ "--d": "150ms" } as React.CSSProperties}>
+              <h1 className="font-display text-4xl font-bold tracking-wide sm:text-5xl">
+                {games.name}
+              </h1>
+              <p className="mt-3 text-lg font-semibold text-gold-300">
+                {games.when}
+                <span className="mx-2 text-cream-200/60">·</span>
+                <span className="text-cream-200">{games.where}</span>
+              </p>
+            </div>
+            <p
+              className="anim-rise max-w-2xl leading-relaxed text-cream-200"
+              style={{ "--d": "300ms" } as React.CSSProperties}
+            >
               {games.intro}
             </p>
-            <AddToCalendar which="games" />
+            <div className="anim-rise" style={{ "--d": "450ms" } as React.CSSProperties}>
+              <AddToCalendar which="games" />
+            </div>
           </div>
         </div>
         <div className="tartan-ribbon" />
@@ -37,22 +47,27 @@ export default function HighlandGamesPage() {
 
       {/* Clan format */}
       <Section>
-        <SectionHeading eyebrow="How it works" title="The Clan Format" />
+        <Reveal>
+          <SectionHeading eyebrow="How it works" title="The Clan Format" />
+        </Reveal>
         <ol className="mx-auto max-w-3xl space-y-4">
           {games.format.map((rule, i) => (
-            <li
-              key={rule}
-              className="flex gap-4 rounded-xl border border-navy-800/15 bg-cream-50 p-5 shadow-sm"
-            >
-              <span className="font-display text-3xl font-bold text-gold-500 tabular-nums">
-                {i + 1}
-              </span>
-              <p className="self-center leading-relaxed text-ink-900">{rule}</p>
+            <li key={rule}>
+              <Reveal
+                delay={i * 80}
+                className="flex gap-4 rounded-xl border border-navy-800/15 bg-cream-50 p-5 shadow-sm"
+              >
+                <span className="font-display text-3xl font-bold text-gold-500 tabular-nums">
+                  {i + 1}
+                </span>
+                <p className="self-center leading-relaxed text-ink-900">{rule}</p>
+              </Reveal>
             </li>
           ))}
         </ol>
 
         {/* The ten clans */}
+        <Reveal>
         <div className="mx-auto mt-8 max-w-3xl rounded-xl bg-navy-800 p-6 text-cream-100">
           <h3 className="font-display text-xl font-bold text-gold-300">
             The Ten Clans
@@ -72,8 +87,10 @@ export default function HighlandGamesPage() {
             it official.
           </p>
         </div>
+        </Reveal>
 
         {/* Who's competing */}
+        <Reveal>
         <div className="mx-auto mt-8 max-w-3xl rounded-xl border border-navy-800/15 bg-cream-50 p-6">
           <h3 className="font-display text-xl font-bold text-navy-800">
             Who&apos;s Competing — 173 Millers
@@ -94,21 +111,26 @@ export default function HighlandGamesPage() {
             ))}
           </div>
         </div>
+        </Reveal>
       </Section>
 
       {/* General rules */}
       <Section className="bg-cream-200/50">
-        <SectionHeading eyebrow="Read before you compete" title="General Rules" />
+        <Reveal>
+          <SectionHeading eyebrow="Read before you compete" title="General Rules" />
+        </Reveal>
         <ul className="mx-auto max-w-3xl space-y-3">
-          {games.generalRules.map((rule) => (
-            <li
-              key={rule}
-              className="flex gap-3 rounded-lg border border-gold-500/40 bg-cream-50 p-4"
-            >
-              <span className="text-gold-600" aria-hidden>
-                ⚔
-              </span>
-              <p className="leading-relaxed text-ink-900">{rule}</p>
+          {games.generalRules.map((rule, i) => (
+            <li key={rule}>
+              <Reveal
+                delay={Math.min(i * 60, 240)}
+                className="flex gap-3 rounded-lg border border-gold-500/40 bg-cream-50 p-4"
+              >
+                <span className="text-gold-600" aria-hidden>
+                  ⚔
+                </span>
+                <p className="leading-relaxed text-ink-900">{rule}</p>
+              </Reveal>
             </li>
           ))}
         </ul>
@@ -116,10 +138,12 @@ export default function HighlandGamesPage() {
 
       {/* Day schedule */}
       <Section>
-        <SectionHeading
-          eyebrow="Saturday · shotgun start"
-          title="Games Day Schedule"
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Saturday · shotgun start"
+            title="Games Day Schedule"
+          />
+        </Reveal>
         <ol className="relative mx-auto max-w-3xl space-y-4 border-l-2 border-gold-500/50 pl-6">
           {games.schedule.map((block) => (
             <li key={block.time} className="relative">
@@ -131,7 +155,7 @@ export default function HighlandGamesPage() {
                 }`}
                 aria-hidden
               />
-              <div
+              <Reveal
                 className={`rounded-xl border p-4 shadow-sm ${
                   block.highlight
                     ? "border-gold-500 bg-gold-500/10"
@@ -151,7 +175,7 @@ export default function HighlandGamesPage() {
                     {block.detail}
                   </p>
                 )}
-              </div>
+              </Reveal>
             </li>
           ))}
         </ol>
@@ -163,13 +187,13 @@ export default function HighlandGamesPage() {
 
       {/* The ten events */}
       <Section className="bg-cream-200/50">
-        <SectionHeading eyebrow="The stations" title="The Ten Events" />
+        <Reveal>
+          <SectionHeading eyebrow="The stations" title="The Ten Events" />
+        </Reveal>
         <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2">
           {games.events.map((ev, i) => (
-            <article
-              key={ev.name}
-              className="rounded-xl border border-navy-800/15 bg-cream-50 p-5 shadow-sm"
-            >
+            <Reveal key={ev.name} delay={(i % 2) * 100} className="h-full">
+            <article className="hover-lift h-full rounded-xl border border-navy-800/15 bg-cream-50 p-5 shadow-sm">
               <h3 className="flex items-baseline gap-3">
                 <span className="font-display text-3xl font-bold text-gold-500 tabular-nums">
                   {i + 1}
@@ -182,10 +206,12 @@ export default function HighlandGamesPage() {
                 {ev.description}
               </p>
             </article>
+            </Reveal>
           ))}
         </div>
 
         {/* Grand finale */}
+        <Reveal>
         <div className="mx-auto mt-8 max-w-5xl rounded-xl border-2 border-gold-500 bg-navy-800 p-6 text-cream-100 shadow-md">
           <h3 className="font-display text-2xl font-bold text-gold-300">
             🏴 {games.finale.name}
@@ -194,11 +220,15 @@ export default function HighlandGamesPage() {
             {games.finale.description}
           </p>
         </div>
+        </Reveal>
       </Section>
 
       {/* Awards */}
       <Section>
-        <SectionHeading eyebrow="Glory awaits" title="Awards" />
+        <Reveal>
+          <SectionHeading eyebrow="Glory awaits" title="Awards" />
+        </Reveal>
+        <Reveal>
         <div className="mx-auto max-w-3xl rounded-xl bg-forest-600 p-6 text-cream-100">
           <ul className="grid gap-3 text-center sm:grid-cols-3">
             {games.awards.map((a) => (
@@ -217,6 +247,7 @@ export default function HighlandGamesPage() {
             {games.awardsNote}
           </p>
         </div>
+        </Reveal>
 
         <div className="mt-12 text-center">
           <Link

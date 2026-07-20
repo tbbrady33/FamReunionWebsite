@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/reveal";
 import { Section, SectionHeading } from "@/components/section";
 import { schedule, type ScheduleItem } from "@/lib/reunion";
 
@@ -26,14 +27,14 @@ const kindLabelStyles: Record<NonNullable<ScheduleItem["kind"]>, string> = {
 export function Schedule() {
   return (
     <Section id="schedule">
-      <SectionHeading eyebrow="August 13–16, 2026" title="Reunion Schedule" />
+      <Reveal>
+        <SectionHeading eyebrow="August 13–16, 2026" title="Reunion Schedule" />
+      </Reveal>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        {schedule.map((day) => (
-          <article
-            key={day.id}
-            className="overflow-hidden rounded-xl border border-navy-800/15 bg-cream-50 shadow-sm"
-          >
+        {schedule.map((day, i) => (
+          <Reveal key={day.id} delay={(i % 2) * 100}>
+            <article className="hover-lift h-full overflow-hidden rounded-xl border border-navy-800/15 bg-cream-50 shadow-sm">
             <header className="bg-navy-800 px-5 py-4 text-cream-100">
               <h3 className="font-display text-2xl font-bold">
                 {day.name}{" "}
@@ -82,7 +83,8 @@ export function Schedule() {
                 </li>
               ))}
             </ol>
-          </article>
+            </article>
+          </Reveal>
         ))}
       </div>
     </Section>

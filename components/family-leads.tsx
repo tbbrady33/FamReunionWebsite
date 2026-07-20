@@ -1,21 +1,24 @@
+import { Reveal } from "@/components/reveal";
 import { Section, SectionHeading } from "@/components/section";
 import { familyLeads } from "@/lib/reunion";
 
 export function FamilyLeads() {
   return (
     <Section id="family-leads">
-      <SectionHeading eyebrow="Your first point of contact" title="Family Leads" />
+      <Reveal>
+        <SectionHeading eyebrow="Your first point of contact" title="Family Leads" />
 
-      <p className="mx-auto mb-10 max-w-2xl text-center text-ink-600">
-        Each family branch coordinates payments, questions, and sign-ups
-        through its Family Lead. Tap your branch below for contact details.
-      </p>
+        <p className="mx-auto mb-10 max-w-2xl text-center text-ink-600">
+          Each family branch coordinates payments, questions, and sign-ups
+          through its Family Lead. Tap your branch below for contact details.
+        </p>
+      </Reveal>
 
       <div className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-2">
-        {familyLeads.map((fl) => (
+        {familyLeads.map((fl, i) => (
+          <Reveal key={fl.branch} delay={(i % 2) * 90} className="self-start">
           <details
-            key={fl.branch}
-            className="group self-start rounded-lg border border-navy-800/15 bg-cream-50 shadow-sm open:border-gold-500/60"
+            className="group rounded-lg border border-navy-800/15 bg-cream-50 shadow-sm transition-colors open:border-gold-500/60 hover:border-gold-500/40"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 [&::-webkit-details-marker]:hidden">
               <div>
@@ -66,6 +69,7 @@ export function FamilyLeads() {
               )}
             </div>
           </details>
+          </Reveal>
         ))}
       </div>
     </Section>

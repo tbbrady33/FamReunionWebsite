@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section";
 import { games } from "@/lib/reunion";
 
@@ -7,32 +8,35 @@ export function HighlandPreview() {
     <section id="highland-games" className="tartan scroll-mt-24 text-cream-100">
       <div className="bg-navy-900/85">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <SectionHeading
-            eyebrow={games.when}
-            title={games.name}
-            onDark
-          />
-
-          <p className="mx-auto mb-10 max-w-3xl text-center text-lg leading-relaxed text-cream-200">
-            {games.intro}
-          </p>
+          <Reveal>
+            <SectionHeading eyebrow={games.when} title={games.name} onDark />
+            <p className="mx-auto mb-10 max-w-3xl text-center text-lg leading-relaxed text-cream-200">
+              {games.intro}
+            </p>
+          </Reveal>
 
           <div className="mb-10 grid gap-4 sm:grid-cols-3">
-            <PreviewCard
-              stat="10"
-              label="Clans"
-              detail="15–18 Millers each, all ages, matching bandanas — from Great Scot to Loch Ness"
-            />
-            <PreviewCard
-              stat="10"
-              label="Event Stations"
-              detail="Caber Toss, Haggis Toss, Sheep Round Up, Scottish Brew Fill & more"
-            />
-            <PreviewCard
-              stat="1"
-              label="Grand Finale"
-              detail="Tug O War in three age brackets — every puller earns a clan point"
-            />
+            <Reveal delay={0}>
+              <PreviewCard
+                stat="10"
+                label="Clans"
+                detail="15–18 Millers each, all ages, matching bandanas — from Great Scot to Loch Ness"
+              />
+            </Reveal>
+            <Reveal delay={120}>
+              <PreviewCard
+                stat="10"
+                label="Event Stations"
+                detail="Caber Toss, Haggis Toss, Sheep Round Up, Scottish Brew Fill & more"
+              />
+            </Reveal>
+            <Reveal delay={240}>
+              <PreviewCard
+                stat="1"
+                label="Grand Finale"
+                detail="Tug O War in three age brackets — every puller earns a clan point"
+              />
+            </Reveal>
           </div>
 
           <div className="text-center">
@@ -62,7 +66,7 @@ function PreviewCard({
   detail: string;
 }) {
   return (
-    <div className="rounded-xl border border-gold-500/40 bg-navy-950/60 p-6 text-center">
+    <div className="hover-lift h-full rounded-xl border border-gold-500/40 bg-navy-950/60 p-6 text-center">
       <div className="font-display text-5xl font-bold text-gold-300">{stat}</div>
       <div className="mt-1 font-semibold tracking-wide uppercase text-cream-100">
         {label}

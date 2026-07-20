@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { BackToTop } from "@/components/back-to-top";
 import { event } from "@/lib/reunion";
 
 const cormorant = Cormorant_Garamond({
@@ -35,11 +36,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${sourceSans.variable}`}>
       <body className="flex min-h-screen flex-col">
+        {/* If JS is unavailable, scroll-reveal content must stay visible. */}
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}`}</style>
+        </noscript>
         <Nav />
         <main id="main" className="flex-1">
           {children}
         </main>
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

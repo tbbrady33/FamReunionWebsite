@@ -1,18 +1,19 @@
+import { Reveal } from "@/components/reveal";
 import { Section, SectionHeading } from "@/components/section";
 import { costs, event, homes, lodgingNote, resortAmenities } from "@/lib/reunion";
 
 export function Lodging() {
   return (
     <Section id="lodging" className="bg-cream-200/50">
-      <SectionHeading eyebrow={event.venue.name} title="Lodging & Costs" />
+      <Reveal>
+        <SectionHeading eyebrow={event.venue.name} title="Lodging & Costs" />
+      </Reveal>
 
       {/* Reunion homes */}
       <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {homes.map((home) => (
-          <div
-            key={home.name}
-            className="flex flex-col rounded-xl border border-navy-800/15 bg-cream-50 p-6 text-center shadow-sm"
-          >
+        {homes.map((home, i) => (
+          <Reveal key={home.name} delay={(i % 3) * 100} className="h-full">
+          <div className="hover-lift flex h-full flex-col rounded-xl border border-navy-800/15 bg-cream-50 p-6 text-center shadow-sm">
             <h3 className="font-display text-2xl font-bold text-navy-800">
               {home.name}
             </h3>
@@ -32,16 +33,20 @@ export function Lodging() {
               View this home →
             </a>
           </div>
+          </Reveal>
         ))}
       </div>
 
-      <p className="mb-12 rounded-lg border border-gold-500/50 bg-gold-500/10 p-4 text-center text-sm font-medium text-ink-900">
-        📅 {lodgingNote}
-      </p>
+      <Reveal>
+        <p className="mb-12 rounded-lg border border-gold-500/50 bg-gold-500/10 p-4 text-center text-sm font-medium text-ink-900">
+          📅 {lodgingNote}
+        </p>
+      </Reveal>
 
       {/* Costs */}
       <div className="mb-12 grid gap-6 sm:grid-cols-2">
-        <div className="rounded-xl bg-navy-800 p-8 text-center text-cream-100">
+        <Reveal className="h-full">
+        <div className="hover-lift h-full rounded-xl bg-navy-800 p-8 text-center text-cream-100">
           <div className="font-display text-5xl font-bold text-gold-300">
             {costs.perNight.price}
           </div>
@@ -55,7 +60,9 @@ export function Lodging() {
             {costs.perNight.note}
           </p>
         </div>
-        <div className="rounded-xl bg-forest-600 p-8 text-center text-cream-100">
+        </Reveal>
+        <Reveal delay={120} className="h-full">
+        <div className="hover-lift h-full rounded-xl bg-forest-600 p-8 text-center text-cream-100">
           <div className="font-display text-5xl font-bold text-gold-300">
             {costs.dayGuest.price}
           </div>
@@ -66,11 +73,13 @@ export function Lodging() {
             Includes: {costs.dayGuest.includes.join(" · ")}
           </p>
         </div>
+        </Reveal>
       </div>
 
       {/* Amenities + assistance */}
       <div className="grid gap-6 sm:grid-cols-2">
-        <div className="rounded-xl border border-navy-800/15 bg-cream-50 p-6">
+        <Reveal className="h-full">
+        <div className="h-full rounded-xl border border-navy-800/15 bg-cream-50 p-6">
           <h3 className="font-display text-xl font-bold text-navy-800">
             Resort Amenities
           </h3>
@@ -85,7 +94,9 @@ export function Lodging() {
             ))}
           </ul>
         </div>
-        <div className="rounded-xl border border-forest-600/30 bg-forest-600/5 p-6">
+        </Reveal>
+        <Reveal delay={120} className="h-full">
+        <div className="h-full rounded-xl border border-forest-600/30 bg-forest-600/5 p-6">
           <h3 className="font-display text-xl font-bold text-forest-700">
             Payments & Assistance
           </h3>
@@ -96,6 +107,7 @@ export function Lodging() {
             💚 {costs.assistance}
           </p>
         </div>
+        </Reveal>
       </div>
     </Section>
   );

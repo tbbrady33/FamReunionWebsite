@@ -94,6 +94,86 @@ body {
   font-family: var(--font-display);
 }
 
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+
+/* Hero entrance — plays once on page load. Stagger with --d. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes crest-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.anim-rise {
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.anim-crest {
+  animation: crest-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scroll reveal — the Reveal component adds .is-visible on intersection. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Card hover lift */
+.hover-lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -12px rgba(16, 24, 46, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise,
+  .anim-crest {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hover-lift,
+  .hover-lift:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Gold rule with a center diamond, used under section headings */
 .heading-rule {
   display: flex;
