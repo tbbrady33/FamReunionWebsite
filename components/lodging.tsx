@@ -7,11 +7,11 @@ export function Lodging() {
       <SectionHeading eyebrow={event.venue.name} title="Lodging & Costs" />
 
       {/* Reunion homes */}
-      <div className="mb-12 grid gap-6 sm:grid-cols-3">
+      <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {homes.map((home) => (
           <div
             key={home.name}
-            className="rounded-xl border border-navy-800/15 bg-cream-50 p-6 text-center shadow-sm"
+            className="flex flex-col rounded-xl border border-navy-800/15 bg-cream-50 p-6 text-center shadow-sm"
           >
             <h3 className="font-display text-2xl font-bold text-navy-800">
               {home.name}
@@ -19,9 +19,18 @@ export function Lodging() {
             <p className="mt-1 font-semibold text-gold-600">
               Sleeps {home.sleeps}
             </p>
+            <p className="mt-1 text-xs font-medium text-ink-600">{home.specs}</p>
             <p className="mt-2 text-sm leading-relaxed text-ink-600">
               {home.detail}
             </p>
+            <a
+              href={home.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto pt-3 text-sm font-semibold text-navy-800 underline decoration-gold-500/60 underline-offset-4 hover:text-gold-600"
+            >
+              View this home →
+            </a>
           </div>
         ))}
       </div>

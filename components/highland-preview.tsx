@@ -9,7 +9,7 @@ export function HighlandPreview() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
           <SectionHeading
             eyebrow={games.when}
-            title="The Great Douglas Miller Highland Games"
+            title={games.name}
             onDark
           />
 
@@ -19,19 +19,19 @@ export function HighlandPreview() {
 
           <div className="mb-10 grid gap-4 sm:grid-cols-3">
             <PreviewCard
-              stat="8"
+              stat="10"
               label="Clans"
-              detail="Age-balanced teams of 21–22, every generation represented"
+              detail="15–18 Millers each, all ages, matching bandanas — from Great Scot to Loch Ness"
             />
             <PreviewCard
-              stat="3"
-              label="All-Family Challenges"
-              detail="Clan tug-of-war, the generations relay, and the signature crest-carry finale"
+              stat="10"
+              label="Event Stations"
+              detail="Caber Toss, Haggis Toss, Sheep Round Up, Scottish Brew Fill & more"
             />
             <PreviewCard
-              stat="5"
-              label="Championship Divisions"
-              detail="From Wee Highland Champion to Highland Champion — glory for every age"
+              stat="1"
+              label="Grand Finale"
+              detail="Tug O War in three age brackets — every puller earns a clan point"
             />
           </div>
 

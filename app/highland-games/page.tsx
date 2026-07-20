@@ -7,7 +7,7 @@ import { games } from "@/lib/reunion";
 
 export const metadata: Metadata = {
   title: `${games.name} · Miller Family Reunion 2026`,
-  description: `${games.when} at ${games.where}. Full rules, schedule, clan format, championships, and awards.`,
+  description: `${games.when} at ${games.where}. Full rules, schedule, clan format, events, and awards.`,
 };
 
 export default function HighlandGamesPage() {
@@ -17,7 +17,7 @@ export default function HighlandGamesPage() {
       <div className="tartan text-cream-100">
         <div className="bg-navy-900/85">
           <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 px-4 py-14 text-center sm:px-6 sm:py-20">
-            <Crest className="h-32 w-auto sm:h-40" />
+            <Crest className="h-36 w-auto sm:h-44" />
             <h1 className="font-display text-4xl font-bold tracking-wide sm:text-5xl">
               {games.name}
             </h1>
@@ -35,7 +35,7 @@ export default function HighlandGamesPage() {
         <div className="tartan-ribbon" />
       </div>
 
-      {/* Format */}
+      {/* Clan format */}
       <Section>
         <SectionHeading eyebrow="How it works" title="The Clan Format" />
         <ol className="mx-auto max-w-3xl space-y-4">
@@ -52,19 +52,43 @@ export default function HighlandGamesPage() {
           ))}
         </ol>
 
+        {/* The ten clans */}
         <div className="mx-auto mt-8 max-w-3xl rounded-xl bg-navy-800 p-6 text-cream-100">
           <h3 className="font-display text-xl font-bold text-gold-300">
-            Age Divisions
+            The Ten Clans
+          </h3>
+          <ul className="mt-4 flex flex-wrap justify-center gap-2">
+            {games.clanNames.map((clan) => (
+              <li
+                key={clan}
+                className="rounded-full border border-gold-500/40 bg-navy-950/60 px-4 py-1.5 font-display text-lg font-semibold"
+              >
+                {clan}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-center text-sm text-cream-200/80">
+            Which clan you land in is the luck of the draw — the bandana makes
+            it official.
+          </p>
+        </div>
+
+        {/* Who's competing */}
+        <div className="mx-auto mt-8 max-w-3xl rounded-xl border border-navy-800/15 bg-cream-50 p-6">
+          <h3 className="font-display text-xl font-bold text-navy-800">
+            Who&apos;s Competing — 173 Millers
           </h3>
           <div className="mt-4 grid gap-3 text-center sm:grid-cols-5">
-            {games.ageGroups.map((g) => (
+            {games.ageCounts.map((g) => (
               <div
-                key={g.name}
-                className="rounded-lg border border-gold-500/30 bg-navy-950/60 p-3"
+                key={g.group}
+                className="rounded-lg border border-navy-800/15 bg-cream-100 p-3"
               >
-                <div className="text-sm font-semibold">{g.name}</div>
-                <div className="mt-1 font-display text-lg font-bold text-gold-300">
-                  {g.ages}
+                <div className="font-display text-2xl font-bold text-navy-800">
+                  {g.count}
+                </div>
+                <div className="mt-1 text-xs font-semibold text-ink-600">
+                  {g.group}
                 </div>
               </div>
             ))}
@@ -72,11 +96,11 @@ export default function HighlandGamesPage() {
         </div>
       </Section>
 
-      {/* Official rules */}
+      {/* General rules */}
       <Section className="bg-cream-200/50">
-        <SectionHeading eyebrow="Read before you compete" title="Official Rules" />
+        <SectionHeading eyebrow="Read before you compete" title="General Rules" />
         <ul className="mx-auto max-w-3xl space-y-3">
-          {games.rules.map((rule) => (
+          {games.generalRules.map((rule) => (
             <li
               key={rule}
               className="flex gap-3 rounded-lg border border-gold-500/40 bg-cream-50 p-4"
@@ -90,23 +114,26 @@ export default function HighlandGamesPage() {
         </ul>
       </Section>
 
-      {/* Run of show */}
+      {/* Day schedule */}
       <Section>
-        <SectionHeading eyebrow="Saturday · 10:00 AM – 3:00 PM" title="Games Schedule" />
-        <ol className="relative mx-auto max-w-3xl space-y-6 border-l-2 border-gold-500/50 pl-6">
+        <SectionHeading
+          eyebrow="Saturday · shotgun start"
+          title="Games Day Schedule"
+        />
+        <ol className="relative mx-auto max-w-3xl space-y-4 border-l-2 border-gold-500/50 pl-6">
           {games.schedule.map((block) => (
             <li key={block.time} className="relative">
               <span
                 className={`absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 ${
-                  block.allFamily
+                  block.highlight
                     ? "border-gold-500 bg-gold-300"
                     : "border-navy-800 bg-cream-50"
                 }`}
                 aria-hidden
               />
               <div
-                className={`rounded-xl border p-5 shadow-sm ${
-                  block.allFamily
+                className={`rounded-xl border p-4 shadow-sm ${
+                  block.highlight
                     ? "border-gold-500 bg-gold-500/10"
                     : "border-navy-800/15 bg-cream-50"
                 }`}
@@ -119,67 +146,76 @@ export default function HighlandGamesPage() {
                     {block.time}
                   </span>
                 </div>
-                {block.allFamily && (
-                  <p className="mt-1 text-[10px] font-bold tracking-[0.25em] uppercase text-gold-600">
-                    Whole clan on the field
+                {"detail" in block && block.detail && (
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                    {block.detail}
                   </p>
                 )}
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {block.events.map((ev) => (
-                    <li
-                      key={ev}
-                      className="rounded-full border border-navy-800/20 bg-cream-100 px-3 py-1 text-sm text-ink-900"
-                    >
-                      {ev}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </li>
           ))}
         </ol>
+        <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-ink-600">
+          Each round, every clan is at a different one of the ten stations below
+          — by the Grand Finale, everyone has played everything.
+        </p>
       </Section>
 
-      {/* Championships & awards */}
+      {/* The ten events */}
       <Section className="bg-cream-200/50">
-        <SectionHeading eyebrow="Glory awaits" title="Championships & Awards" />
-        <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
-          <div className="rounded-xl bg-navy-800 p-6 text-cream-100">
-            <h3 className="font-display text-2xl font-bold text-gold-300">
-              🏆 Championship Titles
-            </h3>
-            <p className="mt-1 text-sm text-cream-200/80">
-              Top finishers from each age division compete head-to-head.
-            </p>
-            <ul className="mt-4 space-y-2">
-              {games.championships.map((c) => (
-                <li key={c} className="flex gap-2 text-cream-100">
-                  <span className="text-gold-300" aria-hidden>
-                    ✦
-                  </span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-xl bg-forest-600 p-6 text-cream-100">
-            <h3 className="font-display text-2xl font-bold text-gold-300">
-              🎖 Clan Awards
-            </h3>
-            <p className="mt-1 text-sm text-cream-200/80">
-              Presented at the 2:45 PM awards ceremony.
-            </p>
-            <ul className="mt-4 space-y-2">
-              {games.awards.map((a) => (
-                <li key={a} className="flex gap-2 text-cream-100">
-                  <span className="text-gold-300" aria-hidden>
-                    ✦
-                  </span>
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <SectionHeading eyebrow="The stations" title="The Ten Events" />
+        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2">
+          {games.events.map((ev, i) => (
+            <article
+              key={ev.name}
+              className="rounded-xl border border-navy-800/15 bg-cream-50 p-5 shadow-sm"
+            >
+              <h3 className="flex items-baseline gap-3">
+                <span className="font-display text-3xl font-bold text-gold-500 tabular-nums">
+                  {i + 1}
+                </span>
+                <span className="font-display text-2xl font-bold text-navy-800">
+                  {ev.name}
+                </span>
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                {ev.description}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        {/* Grand finale */}
+        <div className="mx-auto mt-8 max-w-5xl rounded-xl border-2 border-gold-500 bg-navy-800 p-6 text-cream-100 shadow-md">
+          <h3 className="font-display text-2xl font-bold text-gold-300">
+            🏴 {games.finale.name}
+          </h3>
+          <p className="mt-2 leading-relaxed text-cream-200">
+            {games.finale.description}
+          </p>
+        </div>
+      </Section>
+
+      {/* Awards */}
+      <Section>
+        <SectionHeading eyebrow="Glory awaits" title="Awards" />
+        <div className="mx-auto max-w-3xl rounded-xl bg-forest-600 p-6 text-cream-100">
+          <ul className="grid gap-3 text-center sm:grid-cols-3">
+            {games.awards.map((a) => (
+              <li
+                key={a}
+                className="rounded-lg border border-gold-500/40 bg-forest-700/60 p-4"
+              >
+                <span className="text-2xl" aria-hidden>
+                  🏆
+                </span>
+                <div className="mt-2 font-display text-lg font-bold">{a}</div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-center text-sm text-cream-200/90">
+            {games.awardsNote}
+          </p>
         </div>
 
         <div className="mt-12 text-center">
