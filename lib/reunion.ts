@@ -96,6 +96,13 @@ export const homes: Home[] = [
     url: "https://www.bearlakelegacy.com/bear-lake-vacation-rentals/lake-dream-13-private-home-on-the-water",
   },
   {
+    name: "Barefoot Bungalow #9",
+    sleeps: 24,
+    specs: "6 Bedrooms · 10 Beds · 5 Bathrooms",
+    detail: "Pool, hot tub & lake access.",
+    url: "https://www.bearlakelegacy.com/bear-lake-vacation-rentals/barefoot-bungalow-9-pool-hot-tub-and-lake-access",
+  },
+  {
     name: "The Hideout #24",
     sleeps: 16,
     specs: "4 Bedrooms · 5 Beds · 3 Bathrooms",
