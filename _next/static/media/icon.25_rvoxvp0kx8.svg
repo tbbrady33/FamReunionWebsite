@@ -1,0 +1,8 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 6 L56 6 L56 34 C56 50 45 60 32 63 C19 60 8 50 8 34 Z" fill="#13538c" stroke="#c69018" stroke-width="3"/>
+  <clipPath id="s"><path d="M8 6 L56 6 L56 34 C56 50 45 60 32 63 C19 60 8 50 8 34 Z"/></clipPath>
+  <g clip-path="url(#s)">
+    <path d="M2 2 L12 2 L62 62 L52 62 Z" fill="#ffffff"/>
+    <path d="M62 2 L52 2 L2 62 L12 62 Z" fill="#ffffff"/>
+  </g>
+</svg>
