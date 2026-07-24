@@ -171,6 +171,8 @@ export type Day = {
   date: string;
   headline: string;
   items: ScheduleItem[];
+  /** Optional highlighted callout shown at the bottom of the day card. */
+  note?: string;
 };
 
 export const schedule: Day[] = [
@@ -206,65 +208,67 @@ export const schedule: Day[] = [
     id: "friday",
     name: "Friday",
     date: "August 14",
-    headline: "Family Fun Day",
+    headline: "Choose Your Adventure Day — make it your day, your way, together",
     items: [
-      {
-        time: "7:30 AM",
-        title: "Golf Tournament",
-        detail:
-          "Bear Lake Golf Course (9 holes, 5 min from the Main House) — Friday rate $28, $40 with cart.",
-        kind: "activity",
-      },
       {
         time: "8:00 AM",
         title: "Breakfast",
-        detail: "Scottish Stew & sourdough bread · continental breakfast.",
+        detail:
+          "8:00–9:00 AM at the Main House · Scottish Stew & sourdough bread · continental breakfast.",
         kind: "meal",
       },
       {
         time: "8:30 AM",
-        title: "Morning Hike & Workout",
+        title: "Golf Outing — shotgun start",
         detail:
-          "Logan Canyon trails — Limber Pine Nature Trail (easy 1.5-mi loop, Bear Lake views) up to Steam Mill Hollow for experienced hikers. Morning workout with Libby.",
+          "Enjoy a round with family and friends at Bear Lake Golf Course (9 holes, 5 min from the Main House).",
         kind: "activity",
       },
       {
         time: "9:00 AM",
-        title: "Family Fun Day begins",
+        title: "Hike",
         detail:
-          "Organized activities all day: volleyball tournament · boating & water activities · swimming pool · house games (cornhole, frisbee, volleyball, spikeball, 9-square).",
+          "Scenic trails for all ages and abilities — Limber Pine Nature Trail (easy 1.5-mi loop, Bear Lake views) up to Steam Mill Hollow for experienced hikers.",
+        kind: "activity",
+      },
+      {
+        time: "9:30 AM",
+        title: "Pickleball Tournament",
+        detail: "Friendly competition for all levels — on property.",
+        kind: "activity",
+      },
+      {
+        time: "All Day",
+        title: "Relax & Play",
+        detail:
+          "Swimming pool · cornhole · spikeball · 9-square · frisbee · and more. Or spend the day on Bear Lake — boats, jet skis, paddleboards, kayaks, water toys & UTV rentals. Reserve in advance at bearlakefun.com — popular rentals book quickly!",
         kind: "activity",
       },
       {
         time: "12:00 PM",
-        title: "Lunch — Burgers & Hotdogs",
-        detail: "Chips · salads · watermelon.",
+        title: "Lunch",
+        detail:
+          "12:00–1:00 PM · variety of sandwiches — take yours with you or eat at the Main House.",
         kind: "meal",
       },
       {
-        time: "1:00 PM",
-        title: "Pickleball Tournament",
-        detail: "On property.",
-        kind: "activity",
-      },
-      {
-        time: "2:00 PM",
-        title: "Basketball Tournament",
+        time: "3:00 PM",
+        title: "Volleyball Tournament",
         detail:
-          "Also on your own: marina water rentals (boats, Sea-Doos, paddle boards, kayaks) and go-kart racing at Renegade Raceway.",
+          "3:00–4:30 PM · team up and enjoy some friendly competition on the sand.",
         kind: "activity",
       },
       {
         time: "5:00 PM",
         title: "Dinner — BBQ Beef on a Bun",
-        detail: "With salads.",
+        detail: "At the Main House · with salads.",
         kind: "meal",
       },
       {
-        time: "7:00 PM",
+        time: "6:30 PM",
         title: "Evening Program",
         detail:
-          "Welcome (7:00) · reunion updates (7:10) · introductions (7:20) · Stories of Nana and Grandad (7:40) · sharing of memories (8:00) · Family Talent Show (8:20).",
+          "Come together for our program, stories and memories — welcome · reunion updates · introductions · Stories of Nana and Grandad · sharing of memories · Family Talent Show.",
         kind: "program",
       },
       {
@@ -274,6 +278,7 @@ export const schedule: Day[] = [
         kind: "meal",
       },
     ],
+    note: "✍️ Sign up for pickleball, volleyball, or golf by August 7th so we can plan teams and activities!",
   },
   {
     id: "saturday",

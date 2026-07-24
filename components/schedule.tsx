@@ -82,6 +82,11 @@ export function Schedule() {
                   </p>
                 </li>
               ))}
+              {day.note && (
+                <li className="rounded-lg border border-gold-500 bg-gold-500/10 p-3 text-sm font-medium text-ink-900">
+                  {day.note}
+                </li>
+              )}
             </ol>
             </article>
           </Reveal>
